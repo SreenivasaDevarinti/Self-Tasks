@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let items = ["React", "Angular", "HTML", "CSS", "Vue"];
+      let selectedItems = [];
+      function App() {
+        const [checkedItems, setCheckedItems] = React.useState(false);
+
+        const HandleCheckBox = (event) => {
+          if (event.target.checked) {
+            selectedItems.push(event.target.value);
+            setCheckedItems(!checkedItems);
+          } else{
+            let index = selectedItems.indexOf(event.target.value);
+            selectedItems.splice(index, 1);
+            setCheckedItems(!checkedItems);
+          }
+        }; 
+        return (
+          <div>
+            {items.map((item) => {
+              return (
+                <div key={item}>
+                  <input
+                    type="checkbox"
+                    value={item}
+                    name={item}
+                    onClick={(e) => HandleCheckBox(e)}
+                  ></input>
+                  {item}
+                </div>
+              );
+            })}
+            <div>Selected items</div>
+            {selectedItems.length > 0 &&
+              selectedItems.map((selectedItem) => {
+                return <div key={selectedItem}>{selectedItem}</div>;
+              })}
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

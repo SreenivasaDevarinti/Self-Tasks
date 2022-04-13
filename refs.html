@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Parent() {
+        const InputRef = React.useRef("");
+        const [name, setName] = React.useState("");
+        const handleChange = () => {
+          if (InputRef.current.value) {
+            setName(InputRef.current.value);
+          }
+        };
+        return (
+          <div>
+            Enter some text:
+            <input type="text" ref={InputRef} onChange={() => handleChange()} />
+            <div>name:{name}</div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

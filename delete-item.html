@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let items = [];
+      function App() {
+        const InputRef = React.useRef("");
+        const [name, setName] = React.useState(false);
+        const addItem = () => {
+          if (InputRef.current.value) {
+            items.push(InputRef.current.value);
+            InputRef.current.value = "";
+            setName(!name);
+          }
+        };
+        const deleteItem=(index)=>{
+           items.splice(index,1)
+           setName(!name)
+        }
+        return (
+          <div>
+            Enter some text:
+            <input type="text" ref={InputRef} />
+            <button onClick={() => addItem()}>+</button>
+            <div>items</div>
+            {items.map((items,index) => {
+              return <div key={index}>{items}<button onClick={()=>{deleteItem(index)}}>x</button></div>;
+            })}
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

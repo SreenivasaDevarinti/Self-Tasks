@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Child(props) {
+        return (
+          <div>
+            Enter text:
+            <input
+              type="text"
+              onChange={(e) => props.handleChange(e.target.value)}
+            ></input>
+          </div>
+        );
+      }
+      function Parent() {
+        const [name, setName] = React.useState("");
+        const HandleInputChange = (input) => {
+            console.log(input)
+          setName(input);
+        };
+        return (
+          <div>
+            <Child handleChange={HandleInputChange} />
+            <div>Name: {name}</div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

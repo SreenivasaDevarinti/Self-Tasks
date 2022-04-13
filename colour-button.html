@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let count = 0;
+      let colors = ["#fcba03", "#20fc03", "#03fcf8", "#fc03f0"];
+      function App() {
+        const [color, setColor] = React.useState("");
+        const HandleButtonClick = () => {
+          count++;
+          console.log('--------',count);
+          setColor(colors[count % 4])
+          // switch (count % 4) {
+          //   case 1:
+          //     setColor(colors[0]);
+          //     break;
+          //   case 2:
+          //     setColor(colors[1]);
+          //     break;
+          //   case 3:
+          //     setColor(colors[2]);
+          //     break;
+          //   case 0:
+          //     setColor(colors[3]);
+          //     break;
+          //   default:
+          //     setColor("");
+          // }
+        };
+        return (
+          <div>
+            <button
+              style={{ backgroundColor: color }}
+              onClick={() => HandleButtonClick()}
+            >
+              click
+            </button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
